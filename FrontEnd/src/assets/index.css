@@ -129,3 +129,7 @@ body {
         font-size: 1rem;
     }
 }
+
+.hide-main-nav{
+    display: none !important;
+}

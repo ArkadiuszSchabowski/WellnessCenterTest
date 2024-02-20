@@ -4,7 +4,7 @@ function Home() {
     return (
         <>
             <Hero />
-            <div>Home</div>
+            <div style={{ minHeight: "200vh" }}>Home</div>
         </>
     );
 }

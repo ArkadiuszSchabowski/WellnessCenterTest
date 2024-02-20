@@ -5,11 +5,13 @@ import {
     Navbar as NavbarBs,
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import SetNavVisibility from "./other/SetNavVisibility";
 
 function Navbar() {
     return (
         <>
-            <NavbarBs expand="md" sticky="top" className="">
+            <SetNavVisibility />
+            <NavbarBs id="main-nav" expand="md" sticky="top">
                 <Container>
                     <NavbarBrand>Logo</NavbarBrand>
                     <NavbarBs.Toggle aria-controls="basic-navbar-nav" />

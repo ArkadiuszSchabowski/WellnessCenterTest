@@ -8,7 +8,7 @@ function Hero() {
             <header className="hero-container">
                 <HomeNav />
                 <div className="hero-img-opacity"></div>
-                <img className="hero-img" src={HeroImg} />
+                <img id="hero-img" className="hero-img" src={HeroImg} />
 
                 <Container>
                     <Stack className="hero-group align-items-center" gap={5}>
