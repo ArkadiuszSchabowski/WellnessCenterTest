@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using SpaSalon.Database;
+
 namespace SpaSalon
 {
     public class Program
@@ -6,13 +9,10 @@ namespace SpaSalon
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SpaSalonConnectionString")));
 
             var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
 
             app.UseHttpsRedirection();
 
