@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaSalonMVC", "SpaSalonMVC.csproj", "{FD012A20-6014-4FA2-B016-348475456FE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD012A20-6014-4FA2-B016-348475456FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD012A20-6014-4FA2-B016-348475456FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD012A20-6014-4FA2-B016-348475456FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD012A20-6014-4FA2-B016-348475456FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC77A3F3-ED80-4800-88AA-F849F8D4168A}
+	EndGlobalSection
+EndGlobal
