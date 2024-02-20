@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Radley:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+input,
+button,
+a {
+    outline: none;
+    color: inherit;
+    text-decoration-line: none;
+}
+
+svg,
+img {
+    max-width: 100%;
+}
+
+html,
+body {
+    scroll-behavior: auto !important;
+    overflow-x: hidden;
+    max-width: 100vw;
+    height: 100%;
+}
+.home-nav {
+    position: absolute !important;
+    width: 100%;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    z-index: 10;
+    font-family: "Montserrat", sans-serif;
+    font-style: normal;
+}
+.home-nav a {
+    color: white;
+}
+.home-nav .active {
+    color: #a91212 !important;
+}
+.home-nav a:hover,
+.home-nav a:focus {
+    color: #a91212 !important;
+}
+.hero-container {
+    max-width: 1950px;
+    margin: 0 auto;
+    color: white;
+    font-family: "Radley", serif;
+    font-weight: 400;
+    font-style: italic;
+    position: relative;
+}
+.hero-img {
+    width: 100%;
+    object-fit: cover;
+    height: 100vh;
+}
+.hero-title {
+    text-align: center;
+    color: white;
+    z-index: 10;
+}
+@media (min-width: 1000px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+}
+
+.hero-img-opacity {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.491);
+    z-index: 0;
+}
+
+.hero-group {
+    text-align: center;
+    position: absolute;
+    margin: 0 auto;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.hero-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+.hero-btns button {
+    min-width: 275px;
+    font-size: 2rem;
+    border: none !important;
+    transition: all 250ms ease-in-out;
+}
+.hero-btn1 {
+    background-color: #e8cccc !important;
+    color: #9c2525 !important;
+}
+.hero-btn2 {
+    background-color: #a91212 !important;
+    color: #e8cccc !important;
+}
+.hero-btn2:hover,
+.hero-btn2:focus,
+.hero-btn1:hover,
+.hero-btn1:focus {
+    background-color: white !important;
+    color: #a91212 !important;
+}
+
+@media (max-width: 1133px) {
+    .hero-btns button {
+        min-width: 180px;
+        font-size: 1.2rem;
+    }
+}
+@media (max-width: 753px) {
+    .hero-btns button {
+        min-width: 160px;
+        font-size: 1rem;
+    }
+}
