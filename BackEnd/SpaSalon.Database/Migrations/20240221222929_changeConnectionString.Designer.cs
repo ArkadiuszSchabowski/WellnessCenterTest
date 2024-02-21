@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpaSalon.Database;
 
@@ -10,9 +11,11 @@ using SpaSalon.Database;
 namespace SpaSalon.Database.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240221222929_changeConnectionString")]
+    partial class changeConnectionString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace SpaSalon.Database.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SpaSalon.Database.Entities.MassageName", b =>
+            modelBuilder.Entity("SpaSalon.Database.Entities.Booking", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,36 +50,7 @@ namespace SpaSalon.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MassageNames");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Chocolate Massage - Description",
-                            Performer = 2,
-                            Price = 199,
-                            ServiceName = "Chocolate Massage",
-                            ServiceTime = 60
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Honey Massage Description",
-                            Performer = 1,
-                            Price = 119,
-                            ServiceName = "Honey Massage",
-                            ServiceTime = 45
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Clasic Massage Description",
-                            Performer = 3,
-                            Price = 99,
-                            ServiceName = "Classic Massage",
-                            ServiceTime = 60
-                        });
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("SpaSalon.Database.Entities.User", b =>

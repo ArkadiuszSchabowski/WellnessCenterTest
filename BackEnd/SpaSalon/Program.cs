@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SpaSalon.Database;
+using SpaSalon.Services;
 
 namespace SpaSalon
 {
@@ -11,6 +12,7 @@ namespace SpaSalon
 
             builder.Services.AddControllers();
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SpaSalonConnectionString")));
+            builder.Services.AddScoped<IMassageService, MassageService>();
 
             var app = builder.Build();
 
