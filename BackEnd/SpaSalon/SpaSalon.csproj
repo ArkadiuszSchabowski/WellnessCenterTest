@@ -19,5 +19,4 @@
   <ItemGroup>
     <ProjectReference Include="..\SpaSalon.Database\SpaSalon.Database.csproj" />
   </ItemGroup>
-
 </Project>
