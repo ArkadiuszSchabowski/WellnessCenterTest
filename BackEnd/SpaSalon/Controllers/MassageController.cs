@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpaSalon.Database.Entities;
+using SpaSalon.Models;
 using SpaSalon.Services;
 
 namespace SpaSalon.Controllers
@@ -26,6 +27,12 @@ namespace SpaSalon.Controllers
         {
             MassageName massageName = _service.GetMassage(id);
             return Ok(massageName);
+        }
+        [HttpPost]
+        public ActionResult CreateNewTypeMassage([FromBody] CreateMassageDto dto)
+        {
+            int id = _service.CreateMassage(dto);
+            return Created($"api/massage/{id}", null);
         }
     }
 }

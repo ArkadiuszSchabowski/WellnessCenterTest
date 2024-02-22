@@ -13,6 +13,7 @@ namespace SpaSalon
             builder.Services.AddControllers();
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SpaSalonConnectionString")));
             builder.Services.AddScoped<IMassageService, MassageService>();
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             var app = builder.Build();
 
