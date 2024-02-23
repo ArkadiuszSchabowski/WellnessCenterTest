@@ -18,11 +18,19 @@ namespace SpaSalon
             builder.Services.AddScoped<IMassageService, MassageService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IPasswordHasher<RegisterUserDto>, PasswordHasher<RegisterUserDto>>();
+            builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             var app = builder.Build();
 
             app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Salon Spa - API");
+            });
+            
 
             app.UseAuthorization();
 
