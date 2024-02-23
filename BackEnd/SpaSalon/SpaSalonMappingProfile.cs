@@ -9,6 +9,8 @@ namespace SpaSalon
         public SpaSalonMappingProfile()
         {
             CreateMap<CreateMassageDto, MassageName>();
+            CreateMap<RegisterUserDto, User>()
+              .ForMember(u => u.HashPassword, options => options.MapFrom(dto => dto.Password));
         }
     }
 }

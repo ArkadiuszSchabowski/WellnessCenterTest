@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using SpaSalon.Database.Entities;
 using SpaSalon.Models;
+using SpaSalon.Services;
 
 namespace SpaSalon.Controllers
 {
@@ -9,12 +11,11 @@ namespace SpaSalon.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<List<User>> GetAll()
+        private readonly IAccountService _service;
+
+        public AccountController(IAccountService service)
         {
-            //TODO
-            var users = new List<User>();
-            return users;
+            _service = service;
         }
         [HttpPost("login")]
         public ActionResult Login([FromBody] LoginDto dto)
@@ -23,9 +24,9 @@ namespace SpaSalon.Controllers
             return Ok();
         }
         [HttpPost("registration")]
-        public ActionResult Registration([FromBody] User user)
+        public ActionResult Registration([FromBody] RegisterUserDto dto)
         {
-            //TODO
+            _service.RegisterUser(dto);
             return Ok();
         }
     }
