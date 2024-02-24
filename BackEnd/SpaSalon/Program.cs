@@ -9,8 +9,11 @@ namespace SpaSalon
 {
     public class Program
     {
+        private static NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+
         public static void Main(string[] args)
         {
+            _logger.Info("App started!");
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
