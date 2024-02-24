@@ -7,7 +7,7 @@ function Home() {
 
     const fetchData = async () => {
       try {
-        const response = await fetch('https://localhost:7004/api/massage');
+        const response = await fetch('http://localhost:5267/api/massage');
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
