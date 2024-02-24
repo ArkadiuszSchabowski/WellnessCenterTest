@@ -1,5 +1,7 @@
 import {
     Container,
+    Dropdown,
+    DropdownButton,
     Nav,
     NavbarBrand,
     Navbar as NavbarBs,
@@ -11,23 +13,44 @@ function Navbar() {
     return (
         <>
             <SetNavVisibility />
-            <NavbarBs id="main-nav" expand="md" sticky="top">
+            <NavbarBs
+                className="navbar-dark bg-dark"
+                id="main-nav"
+                expand="md"
+                sticky="top"
+            >
                 <Container>
                     <NavbarBrand>Logo</NavbarBrand>
                     <NavbarBs.Toggle aria-controls="basic-navbar-nav" />
                     <NavbarBs.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
                             <Nav.Link to="/" as={NavLink}>
-                                Homepage
+                                Home
                             </Nav.Link>
+                            <DropdownButton
+                                data-bs-theme="dark"
+                                className="nav-link custom-dropdown-btn"
+                                id="dropdown-basic-button"
+                                title="Services"
+                            >
+                                <Dropdown.Item href="#/action-1">
+                                    All 
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">
+                                    Massage
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">
+                                    Something else
+                                </Dropdown.Item>
+                            </DropdownButton>
                             <Nav.Link to="/services" as={NavLink}>
-                                Devices
+                                Services
                             </Nav.Link>
                             <Nav.Link to="/about" as={NavLink}>
-                                Devices
+                                About
                             </Nav.Link>
                             <Nav.Link to="/contact" as={NavLink}>
-                                Devices
+                                Contact
                             </Nav.Link>
                         </Nav>
                     </NavbarBs.Collapse>

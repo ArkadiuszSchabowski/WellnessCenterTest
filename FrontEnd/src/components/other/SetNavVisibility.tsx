@@ -23,10 +23,10 @@ export default function SetNavVisibility() {
         if (location.pathname !== "/") {
             mainNav?.classList.remove("hide-main-nav");
         }
-        const heroImg=document.getElementById("hero-img")
-        if(heroImg){
-            console.log(isInViewport(heroImg))
-        }
+        // const heroImg=document.getElementById("hero-img")
+        // if(heroImg){
+        //     console.log(isInViewport(heroImg))
+        // }
       
     }, [location]);
     return null;
