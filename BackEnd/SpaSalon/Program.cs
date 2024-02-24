@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SpaSalon.Database;
 using SpaSalon.Database.Entities;
+using SpaSalon.Middleware;
 using SpaSalon.Models;
 using SpaSalon.Services;
 
@@ -22,15 +23,16 @@ namespace SpaSalon
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<ErrorHandlingMiddleware>();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             var app = builder.Build();
 
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseHttpsRedirection();
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Salon Spa - API");
             });
             
