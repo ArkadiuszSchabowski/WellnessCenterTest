@@ -20,7 +20,7 @@ namespace SpaSalon.Controllers
         [HttpPost("login")]
         public ActionResult Login([FromBody] LoginDto dto)
         {
-            //TODO
+            _service.LoginUser(dto);
             return Ok();
         }
         [HttpPost("registration")]

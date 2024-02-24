@@ -20,7 +20,7 @@ namespace SpaSalon
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SpaSalonConnectionString")));
             builder.Services.AddScoped<IMassageService, MassageService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
-            builder.Services.AddScoped<IPasswordHasher<RegisterUserDto>, PasswordHasher<RegisterUserDto>>();
+            builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
