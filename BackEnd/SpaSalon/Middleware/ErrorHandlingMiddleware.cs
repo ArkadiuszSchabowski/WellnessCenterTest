@@ -14,12 +14,12 @@ namespace SpaSalon.Middleware
             catch (BadRequestException e)
             {
                 context.Response.StatusCode = 400;
-                await context.Response.WriteAsync("Bad request");
+                await context.Response.WriteAsync(e.Message);
             }
             catch (NotFoundException e)
             {
                 context.Response.StatusCode = 404;
-                await context.Response.WriteAsync("Not found");
+                await context.Response.WriteAsync(e.Message);
             }
             catch (Exception e)
             {

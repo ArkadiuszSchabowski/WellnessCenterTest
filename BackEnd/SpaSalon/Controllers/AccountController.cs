@@ -20,13 +20,26 @@ namespace SpaSalon.Controllers
         [HttpPost("login")]
         public ActionResult Login([FromBody] LoginDto dto)
         {
-            _service.LoginUser(dto);
+            _service.GenerateJWT(dto);
             return Ok();
         }
         [HttpPost("registration")]
         public ActionResult Registration([FromBody] RegisterUserDto dto)
         {
             _service.RegisterUser(dto);
+            return Ok();
+        }
+        [HttpGet]
+        public ActionResult GetAll() 
+        {
+            var users = _service.GetUsers();
+            return Ok(users);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult RemoveUser([FromRoute] int id)
+        {
+            _service.RemoveUser(id);
             return Ok();
         }
     }

@@ -5,6 +5,7 @@ namespace SpaSalon.Database
 {
     public class MyDbContext : DbContext
     {
+        public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<MassageName> MassageNames { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
@@ -39,6 +40,27 @@ namespace SpaSalon.Database
                 Price = 99,
                 Performer = Enums.PerformerType.Man,
             });
+            modelBuilder.Entity<Role>().HasData(new Role
+            {
+                Id = 1,
+                Name = "User"
+            },
+            new Role
+            {
+                Id = 2,
+                Name = "Manager"
+            },
+            new Role
+            {
+                Id = 3,
+                Name = "Admin"
+            });
+
+            modelBuilder.Entity<User>()
+                  .HasOne(u => u.Role)
+                  .WithMany() // Domyślnie ustaw na wiele użytkowników do jednej roli
+                  .HasForeignKey(u => u.RoleId)
+                  .IsRequired();
         }
     }
 }
