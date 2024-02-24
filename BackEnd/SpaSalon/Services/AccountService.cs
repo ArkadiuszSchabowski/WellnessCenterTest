@@ -32,7 +32,10 @@ namespace SpaSalon.Services
 
         public void GenerateJWT(LoginDto dto)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Login == dto.Login);
+            var user = _context.Users
+                .Include(u =>u.Role)
+                .FirstOrDefault(u => u.Login == dto.Login);
+
             if (user == null)
             {
                 throw new BadRequestException("Invalid username or password");
@@ -42,13 +45,6 @@ namespace SpaSalon.Services
             {
                 throw new BadRequestException("Invalid username or password");
             }
-            var claims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
-                //TODO
-            };
-
         }
 
 

@@ -58,7 +58,7 @@ namespace SpaSalon.Database
 
             modelBuilder.Entity<User>()
                   .HasOne(u => u.Role)
-                  .WithMany() // Domyślnie ustaw na wiele użytkowników do jednej roli
+                  .WithMany()
                   .HasForeignKey(u => u.RoleId)
                   .IsRequired();
         }
