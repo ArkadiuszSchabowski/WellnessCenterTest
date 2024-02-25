@@ -13,10 +13,12 @@ namespace SpaSalon.Services
     public class UserService : IUserService
     {
         private readonly MyDbContext _context;
+        private readonly ILogger<UserService> _logger;
 
-        public UserService(MyDbContext context)
+        public UserService(MyDbContext context, ILogger<UserService> logger)
         {
             _context = context;
+            _logger = logger;
         }
         public List<User> GetUsers()
         {
@@ -36,6 +38,7 @@ namespace SpaSalon.Services
             {
                 throw new NotFoundException("Not found");
             }
+            _logger.LogWarning($"Remove user {id}");
             _context.Users.Remove(user);
             _context.SaveChanges();
         }

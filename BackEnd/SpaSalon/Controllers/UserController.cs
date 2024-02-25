@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpaSalon.Services;
 
@@ -6,20 +7,19 @@ namespace SpaSalon.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
-        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserService service, ILogger<UserController> logger)
+        public UserController(IUserService service)
         {
             _service = service;
-            _logger = logger;
         }
         [HttpGet]
+        [Authorize(Roles = "User")]
         public ActionResult GetAll()
         {
-            _logger.LogInformation("Test GetAll");
             var users = _service.GetUsers();
             return Ok(users);
         }
@@ -27,7 +27,11 @@ namespace SpaSalon.Controllers
         [HttpDelete("{id}")]
         public ActionResult RemoveUser([FromRoute] int id)
         {
-            _logger.LogWarning($"Remove user {id}");
+            if (User?.Identity?.IsAuthenticated != true)
+            {
+                throw new UnauthorizedAccessException("Unauthorized access!");
+            }
+
             _service.RemoveUser(id);
             return Ok();
         }

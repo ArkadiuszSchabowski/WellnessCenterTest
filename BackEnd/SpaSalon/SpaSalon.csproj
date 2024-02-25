@@ -8,11 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="C:\Users\Użytkownik\.nuget\packages\nlog.config\4.7.15\contentFiles\any\any\NLog.config" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="C:\Users\Użytkownik\.nuget\packages\nlog.config\4.7.15\contentFiles\any\any\NLog.config" />
+    <Content Include="C:\Users\Użytkownik\.nuget\packages\nlog.config\4.7.15\contentFiles\any\any\NLog.config" />
   </ItemGroup>
 
   <ItemGroup>
