@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="C:\Users\Użytkownik\.nuget\packages\nlog.config\4.7.15\contentFiles\any\any\NLog.config" />
+    <Content Remove="C:\Users\Użytkownik\.nuget\packages\nlog.config\4.7.15\contentFiles\any\any\NLog.config" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="C:\Users\Użytkownik\.nuget\packages\nlog.config\4.7.15\contentFiles\any\any\NLog.config" />
+    <None Include="C:\Users\Użytkownik\.nuget\packages\nlog.config\4.7.15\contentFiles\any\any\NLog.config" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +26,7 @@
     </PackageReference>
     <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="NLog.Config" Version="4.7.15" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 

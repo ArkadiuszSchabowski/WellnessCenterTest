@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using NLog.Extensions.Logging;
 using SpaSalon.Database;
 using SpaSalon.Database.Entities;
 using SpaSalon.Middleware;
@@ -17,6 +18,7 @@ namespace SpaSalon
         public static void Main(string[] args)
         {
             _logger.Info("App started!");
+            _logger.Error("Test error");
             var builder = WebApplication.CreateBuilder(args);
             var authenticationSettings = new AuthenticationSettings();
 
@@ -37,6 +39,7 @@ namespace SpaSalon
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
                 };
             });
+            builder.Logging.AddNLog();
             builder.Services.AddSingleton(authenticationSettings);
             builder.Services.AddControllers();
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SpaSalonConnectionString")));
