@@ -12,7 +12,9 @@ Open Backend in Visual Studio:
 Open Backend in Visual Studio Code:
 1.Download the .NET SDK Core plugin.
 2.Navigate to the SpaSalon folder in WellnessCenter/Backend: cd WellnessCenter/Backend/SpaSalon
-3.Run the project in the command line: dotnet run http
+3.Run the project in the command line: dotnet run --launch-profile http start http://localhost:5267/swagger/index.html
+4.Click on the link: http://localhost:5267/swagger/index.html
+
 
 Open Frontend in Visual Studio Code:
 1. Navigate to the WellnessCenter folder: cd WellnessCenter
