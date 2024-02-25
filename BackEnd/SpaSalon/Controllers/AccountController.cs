@@ -20,8 +20,8 @@ namespace SpaSalon.Controllers
         [HttpPost("login")]
         public ActionResult Login([FromBody] LoginDto dto)
         {
-            _service.GenerateJWT(dto);
-            return Ok();
+            string token = _service.GenerateJWT(dto);
+            return Ok(token);
         }
         [HttpPost("registration")]
         public ActionResult Registration([FromBody] RegisterUserDto dto)

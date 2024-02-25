@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SpaSalon.Database;
 using SpaSalon.Database.Entities;
 using SpaSalon.Middleware;
 using SpaSalon.Models;
 using SpaSalon.Services;
+using System.Text;
 
 namespace SpaSalon
 {
@@ -16,7 +18,26 @@ namespace SpaSalon
         {
             _logger.Info("App started!");
             var builder = WebApplication.CreateBuilder(args);
+            var authenticationSettings = new AuthenticationSettings();
 
+            builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
+            builder.Services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = "Bearer";
+                option.DefaultScheme = "Bearer";
+                option.DefaultChallengeScheme = "Bearer";
+            }).AddJwtBearer(cfg =>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = authenticationSettings.JwtIssuer,
+                    ValidAudience = authenticationSettings.JwtIssuer,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
+                };
+            });
+            builder.Services.AddSingleton(authenticationSettings);
             builder.Services.AddControllers();
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SpaSalonConnectionString")));
             builder.Services.AddScoped<IMassageService, MassageService>();
@@ -35,6 +56,7 @@ namespace SpaSalon
                        .AllowAnyMethod()
             );
             app.UseMiddleware<ErrorHandlingMiddleware>();
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseSwagger();
             app.UseSwaggerUI(options =>
