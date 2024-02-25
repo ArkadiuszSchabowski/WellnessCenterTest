@@ -29,18 +29,5 @@ namespace SpaSalon.Controllers
             _service.RegisterUser(dto);
             return Ok();
         }
-        [HttpGet]
-        public ActionResult GetAll() 
-        {
-            var users = _service.GetUsers();
-            return Ok(users);
-        }
-
-        [HttpDelete("{id}")]
-        public ActionResult RemoveUser([FromRoute] int id)
-        {
-            _service.RemoveUser(id);
-            return Ok();
-        }
     }
 }
