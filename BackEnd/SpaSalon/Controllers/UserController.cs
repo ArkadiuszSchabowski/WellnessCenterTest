@@ -17,7 +17,6 @@ namespace SpaSalon.Controllers
             _service = service;
         }
         [HttpGet]
-        [Authorize(Roles = "User")]
         public ActionResult GetAll()
         {
             var users = _service.GetUsers();

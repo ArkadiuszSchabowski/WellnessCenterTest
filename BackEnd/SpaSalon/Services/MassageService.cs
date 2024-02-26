@@ -11,6 +11,8 @@ namespace SpaSalon.Services
         int CreateMassage(CreateMassageDto dto);
         public List<MassageName> GetAll();
         MassageName GetMassage(int id);
+        void RemoveMassage(int id);
+        MassageName UpdateMassage(UpdateMassageDto dto, int id);
     }
     public class MassageService : IMassageService
     {
@@ -23,19 +25,6 @@ namespace SpaSalon.Services
             _mapper = mapper;
         }
 
-        public int CreateMassage(CreateMassageDto dto)
-        {
-            if(dto == null)
-            {
-                throw new BadRequestException("Bad request");
-            }
-            var massage = _mapper.Map<MassageName>(dto);
-
-            _context.MassageNames.Add(massage);
-            _context.SaveChanges();
-
-            return massage.Id;
-        }
 
         public List<MassageName> GetAll()
         {
@@ -55,6 +44,43 @@ namespace SpaSalon.Services
                 throw new BadRequestException("Not found");
             }
 
+            return massage;
+        }
+        public int CreateMassage(CreateMassageDto dto)
+        {
+            if(dto == null)
+            {
+                throw new BadRequestException("Bad request");
+            }
+            var massage = _mapper.Map<MassageName>(dto);
+
+            _context.MassageNames.Add(massage);
+            _context.SaveChanges();
+
+            return massage.Id;
+        }
+
+        public void RemoveMassage(int id)
+        {
+            var massage = _context.MassageNames.FirstOrDefault(m =>m.Id == id);
+            if(massage == null)
+            {
+                throw new NotFoundException("Not found");
+            }
+            _context.MassageNames.Remove(massage);
+            _context.SaveChanges();
+        }
+
+        public MassageName UpdateMassage(UpdateMassageDto dto, int id)
+        {
+            var massage = _context.MassageNames.FirstOrDefault(m => m.Id == id);
+            if (massage == null)
+            {
+                throw new NotFoundException("Not found");
+            }
+            _mapper.Map(dto, massage);
+
+            _context.SaveChanges();
             return massage;
         }
     }
