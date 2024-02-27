@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpaSalon.Database.Entities;
 using SpaSalon.Models;
@@ -18,7 +19,7 @@ namespace SpaSalon.Controllers
             _service = service;
         }
         [HttpGet]
-        //All
+
         public ActionResult<List<MassageName>> GetAll()
         {
             var massages = _service.GetAll();
@@ -38,18 +39,18 @@ namespace SpaSalon.Controllers
             int id = _service.CreateMassage(dto);
             return Created($"api/massage/{id}", null);
         }
+        [HttpPatch("{id}")]
+        public ActionResult UpdateMassage([FromBody] UpdateMassageDto dto, [FromRoute] int id)
+        {
+            var massage = _service.UpdateMassage(dto, id);
+            return Ok(massage);
+        }
         [HttpDelete("{id}")]
         //Manager
         public ActionResult RemoveMassage([FromRoute] int id)
         {
             _service.RemoveMassage(id);
             return NoContent();
-        }
-        [HttpPatch("{id}")]
-        public ActionResult UpdateMassage([FromBody] UpdateMassageDto dto, [FromRoute] int id)
-        {
-            var massage = _service.UpdateMassage(dto, id);
-            return Ok(massage);
         }
     }
 }
