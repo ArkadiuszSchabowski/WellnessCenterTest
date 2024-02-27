@@ -8,6 +8,7 @@ namespace SpaSalon.Services
 {
     public interface IMassageService
     {
+        object BookingMassage(BookingMassageDto dto);
         int CreateMassage(CreateMassageDto dto);
         public List<MassageName> GetAll();
         MassageName GetMassage(int id);
@@ -82,6 +83,11 @@ namespace SpaSalon.Services
 
             _context.SaveChanges();
             return massage;
+        }
+
+        public object BookingMassage(BookingMassageDto dto)
+        {
+
         }
     }
 
