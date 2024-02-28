@@ -18,7 +18,11 @@ namespace SpaSalon.Services
         string GenerateJWT(LoginDto dto);
         void RegisterUser(RegisterUserDto dto);
     }
-    public class AccountService : IAccountService
+    public interface IRegisterAdminService
+    {
+        public void RegisterAdmin(RegisterUserDto dto);
+    }
+    public class AccountService : IAccountService, IRegisterAdminService
     {
         private readonly MyDbContext _context;
         private readonly IMapper _mapper;
@@ -68,6 +72,16 @@ namespace SpaSalon.Services
         public void RegisterUser(RegisterUserDto dto)
         {
             dto.RoleId = 1;
+            var user = _mapper.Map<User>(dto);
+
+            var hashedPassword = _passwordHasher.HashPassword(user, user.HashPassword);
+            user.HashPassword = hashedPassword;
+            _context.Users.Add(user);
+            _context.SaveChanges();
+        }
+        public void RegisterAdmin(RegisterUserDto dto)
+        {
+            dto.RoleId = 3;
             var user = _mapper.Map<User>(dto);
 
             var hashedPassword = _passwordHasher.HashPassword(user, user.HashPassword);

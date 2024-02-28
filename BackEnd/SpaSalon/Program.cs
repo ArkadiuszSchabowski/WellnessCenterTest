@@ -6,6 +6,7 @@ using SpaSalon.Database;
 using SpaSalon.Database.Entities;
 using SpaSalon.Middleware;
 using SpaSalon.Models;
+using SpaSalon.Seeders;
 using SpaSalon.Services;
 using System.Text;
 
@@ -47,7 +48,9 @@ namespace SpaSalon
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IBookingService, BookingService>();
+            builder.Services.AddScoped<IAccountSeeder, AccountSeeder>();
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            builder.Services.AddScoped<IRegisterAdminService, AccountService>();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<ErrorHandlingMiddleware>();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);

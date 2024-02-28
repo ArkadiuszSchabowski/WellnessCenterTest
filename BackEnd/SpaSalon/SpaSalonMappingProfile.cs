@@ -12,6 +12,7 @@ namespace SpaSalon
             CreateMap<RegisterUserDto, User>()
               .ForMember(u => u.HashPassword, options => options.MapFrom(dto => dto.Password));
             CreateMap<UpdateMassageDto, MassageName>();
+            CreateMap<RegisterUserDto, AdminAccountDto>();
         }
     }
 }
