@@ -30,7 +30,7 @@ namespace SpaSalon.Services
             
             if (users == null)
             {
-                throw new NotFoundException("Not found");
+                throw new NotFoundException("User not found");
             }
             if(dto.PageSize < 1 || dto.PageNumber < 1)
             {

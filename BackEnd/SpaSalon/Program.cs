@@ -46,6 +46,7 @@ namespace SpaSalon
             builder.Services.AddScoped<IMassageService, MassageService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<ErrorHandlingMiddleware>();

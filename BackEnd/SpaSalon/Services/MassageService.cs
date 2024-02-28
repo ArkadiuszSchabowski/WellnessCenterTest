@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using SpaSalon.Database;
 using SpaSalon.Database.Entities;
 using SpaSalon.Exceptions;
@@ -8,7 +9,6 @@ namespace SpaSalon.Services
 {
     public interface IMassageService
     {
-        object BookingMassage(BookingMassageDto dto);
         int CreateMassage(CreateMassageDto dto);
         public List<MassageName> GetAll();
         MassageName GetMassage(int id);
@@ -31,7 +31,7 @@ namespace SpaSalon.Services
         {
             if (!_context.MassageNames.Any())
             {
-                throw new NotFoundException("Not found");
+                throw new NotFoundException("Massage not found");
             }
             return _context.MassageNames.ToList();
         }
@@ -83,11 +83,6 @@ namespace SpaSalon.Services
 
             _context.SaveChanges();
             return massage;
-        }
-
-        public object BookingMassage(BookingMassageDto dto)
-        {
-
         }
     }
 

@@ -8,6 +8,7 @@ namespace SpaSalon.Database
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<MassageName> MassageNames { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
 

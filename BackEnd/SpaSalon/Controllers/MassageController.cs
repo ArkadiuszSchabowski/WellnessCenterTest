@@ -10,7 +10,6 @@ namespace SpaSalon.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class MassageController : ControllerBase
     {
         private readonly IMassageService _service;
@@ -20,14 +19,12 @@ namespace SpaSalon.Controllers
             _service = service;
         }
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult<List<MassageName>> GetAll()
         {
             var massages = _service.GetAll();
             return Ok(massages);
         }
         [HttpGet("{id}")]
-        [AllowAnonymous]
         public ActionResult<MassageName> GetMassage([FromRoute] int id)
         {
             MassageName massageName = _service.GetMassage(id);
@@ -54,12 +51,6 @@ namespace SpaSalon.Controllers
         {
             _service.RemoveMassage(id);
             return NoContent();
-        }
-        [HttpPost("booking")]
-        public ActionResult BookingMassage(BookingMassageDto dto)
-        {
-            var massage = _service.BookingMassage(dto);
-            return Created();
         }
     }
 }
