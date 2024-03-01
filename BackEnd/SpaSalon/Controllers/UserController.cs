@@ -27,10 +27,6 @@ namespace SpaSalon.Controllers
         [HttpDelete("{id}")]
         public ActionResult RemoveUser([FromRoute] int id)
         {
-            if (User?.Identity?.IsAuthenticated != true)
-            {
-                throw new UnauthorizedAccessException("Unauthorized access!");
-            }
 
             _service.RemoveUser(id);
             return Ok();
