@@ -10,9 +10,10 @@ namespace SpaSalon.Services
     public interface IUserService
     {
         void RemoveUser(int id);
-        public List<User> GetUsers(PaginationInfoDto dto);
+        public List<UserDto> GetUsers(PaginationInfoDto dto);
         void UpdateRole(UpdateRoleDto dto);
         List<Role> GetRoles();
+        object GetUser(int id);
     }
     public class UserService : IUserService
     {
@@ -27,7 +28,7 @@ namespace SpaSalon.Services
             _mapper = mapper;
         }
 
-        public List<User> GetUsers(PaginationInfoDto dto)
+        public List<UserDto> GetUsers(PaginationInfoDto dto)
         {
             var users = _context.Users.Skip(dto.PageSize * (dto.PageNumber -1)).Take(dto.PageSize).ToList();
             
@@ -39,7 +40,17 @@ namespace SpaSalon.Services
             {
                 throw new BadRequestException("Invalid page size or page number");
             }
-            return users;
+            var usersDto = _mapper.Map<List<UserDto>>(users);
+            return usersDto;
+        }
+        public object GetUser(int id)
+        {
+            var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                throw new NotFoundException("Not found");
+            }
+            return user;
         }
 
         public void RemoveUser(int id)

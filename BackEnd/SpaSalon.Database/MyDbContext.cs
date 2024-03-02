@@ -61,7 +61,6 @@ namespace SpaSalon.Database
                 .HasMany(r => r.Users)
                 .WithOne(u => u.Role)
                 .HasForeignKey(u => u.RoleId);
-
         }
     }
 }

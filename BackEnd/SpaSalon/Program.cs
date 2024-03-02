@@ -5,10 +5,10 @@ using NLog.Extensions.Logging;
 using SpaSalon.Database;
 using SpaSalon.Database.Entities;
 using SpaSalon.Middleware;
-using SpaSalon.Models;
 using SpaSalon.Seeders;
 using SpaSalon.Services;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace SpaSalon
 {
@@ -18,8 +18,6 @@ namespace SpaSalon
 
         public static void Main(string[] args)
         {
-            _logger.Info("App started!");
-            _logger.Error("Test error");
             var builder = WebApplication.CreateBuilder(args);
             var authenticationSettings = new AuthenticationSettings();
 
@@ -42,7 +40,13 @@ namespace SpaSalon
             });
             builder.Logging.AddNLog();
             builder.Services.AddSingleton(authenticationSettings);
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
+
+
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SpaSalonConnectionString")));
             builder.Services.AddScoped<IMassageService, MassageService>();
             builder.Services.AddScoped<IAccountService, AccountService>();

@@ -24,6 +24,13 @@ namespace SpaSalon.Controllers
             return Ok(users);
         }
 
+        [HttpGet("{id}")]
+        public ActionResult GetUser([FromRoute] int id)
+        {
+            var user = _service.GetUser(id);
+            return Ok(user);
+        }
+
         [HttpDelete("{id}")]
         public ActionResult RemoveUser([FromRoute] int id)
         {

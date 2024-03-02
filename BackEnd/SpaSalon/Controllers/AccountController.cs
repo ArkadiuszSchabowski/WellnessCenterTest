@@ -26,13 +26,13 @@ namespace SpaSalon.Controllers
             string token = _service.GenerateJWT(dto);
             return Ok(token);
         }
-        [HttpPost("registration")]
+        [HttpPost("register")]
         public ActionResult Registration([FromBody] RegisterUserDto dto)
         {
             _service.RegisterUser(dto);
             return Ok();
         }
-        [HttpPost("registration/admin")]
+        [HttpPost("register/admin")]
         public ActionResult<AdminAccountDto> CreateAdmin()
         {
             var adminAccount = _seeder.TryCreateAdminAccount();
