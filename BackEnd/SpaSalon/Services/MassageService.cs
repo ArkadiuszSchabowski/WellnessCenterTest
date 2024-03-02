@@ -38,15 +38,11 @@ namespace SpaSalon.Services
 
         public MassageName GetMassage(int id)
         {
-            var massage = _context.MassageNames.FirstOrDefault(m => m.Id == id);
-
-            if(massage == null)
-            {
-                throw new BadRequestException("Not found");
-            }
+            MassageName massage = GetMassageById(id);
 
             return massage;
         }
+
         public int CreateMassage(CreateMassageDto dto)
         {
             if(dto == null)
@@ -63,25 +59,29 @@ namespace SpaSalon.Services
 
         public void RemoveMassage(int id)
         {
-            var massage = _context.MassageNames.FirstOrDefault(m =>m.Id == id);
-            if(massage == null)
-            {
-                throw new NotFoundException("Not found");
-            }
+            MassageName massage = GetMassageById(id);
+
             _context.MassageNames.Remove(massage);
             _context.SaveChanges();
         }
 
         public MassageName UpdateMassage(UpdateMassageDto dto, int id)
         {
-            var massage = _context.MassageNames.FirstOrDefault(m => m.Id == id);
-            if (massage == null)
-            {
-                throw new NotFoundException("Not found");
-            }
+            MassageName massage = GetMassageById(id);
+
             _mapper.Map(dto, massage);
 
             _context.SaveChanges();
+            return massage;
+        }
+        public MassageName GetMassageById(int id)
+        {
+            var massage = _context.MassageNames.FirstOrDefault(m => m.Id == id);
+
+            if (massage == null)
+            {
+                throw new BadRequestException("Not found");
+            }
             return massage;
         }
     }
