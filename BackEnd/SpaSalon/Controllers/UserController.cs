@@ -48,7 +48,7 @@ namespace SpaSalon.Controllers
         public ActionResult UpdateRole([FromRoute] UpdateRoleDto dto)
         {
             _service.UpdateRole(dto);
-            return Ok($"User id: {dto.UserId} changed role {dto.RoleId}");
+            return Ok();
         }
     }
 }

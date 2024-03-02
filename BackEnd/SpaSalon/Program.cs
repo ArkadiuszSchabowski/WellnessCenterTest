@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using NLog.Extensions.Logging;
 using SpaSalon.Database;
 using SpaSalon.Database.Entities;
-using SpaSalon.Middleware;
+//using SpaSalon.Middleware;
 using SpaSalon.Seeders;
 using SpaSalon.Services;
 using System.Text;
@@ -56,7 +56,7 @@ namespace SpaSalon
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             builder.Services.AddScoped<IRegisterAdminService, AccountService>();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddScoped<ErrorHandlingMiddleware>();
+            //builder.Services.AddScoped<ErrorHandlingMiddleware>();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             var app = builder.Build();
@@ -66,7 +66,7 @@ namespace SpaSalon
                        .AllowAnyHeader()
                        .AllowAnyMethod()
             );
-            app.UseMiddleware<ErrorHandlingMiddleware>();
+            //app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseSwagger();

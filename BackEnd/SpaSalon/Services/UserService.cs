@@ -30,7 +30,7 @@ namespace SpaSalon.Services
 
         public List<UserDto> GetUsers(PaginationInfoDto dto)
         {
-            var users = _context.Users.Skip(dto.PageSize * (dto.PageNumber -1)).Take(dto.PageSize).ToList();
+            var users = _context.Users.Include(u => u.Role).Skip(dto.PageSize * (dto.PageNumber -1)).Take(dto.PageSize).ToList();
             
             if (users == null)
             {
@@ -40,7 +40,7 @@ namespace SpaSalon.Services
             {
                 throw new BadRequestException("Invalid page size or page number");
             }
-            var usersDto = _mapper.Map<List<UserDto>>(users);
+            List<UserDto> usersDto = _mapper.Map<List<UserDto>>(users);
             return usersDto;
         }
         public object GetUser(int id)
