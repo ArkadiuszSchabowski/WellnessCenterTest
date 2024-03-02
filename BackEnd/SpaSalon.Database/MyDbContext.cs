@@ -57,11 +57,11 @@ namespace SpaSalon.Database
                 Name = "Admin"
             });
 
-            modelBuilder.Entity<User>()
-                  .HasOne(u => u.Role)
-                  .WithMany()
-                  .HasForeignKey(u => u.RoleId)
-                  .IsRequired();
+            modelBuilder.Entity<Role>()
+                .HasMany(r => r.Users)
+                .WithOne(u => u.Role)
+                .HasForeignKey(u => u.RoleId);
+
         }
     }
 }

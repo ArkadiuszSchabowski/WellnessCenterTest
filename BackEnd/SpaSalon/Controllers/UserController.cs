@@ -41,11 +41,11 @@ namespace SpaSalon.Controllers
             var roles = _service.GetRoles();
             return Ok(roles);
         }
-        [HttpPatch("role/{id}")]
-        public ActionResult UpdateRole([FromRoute] int id, [FromBody] string role)
+        [HttpPatch("{dto.UserId}/role/{dto.RoleId}")]
+        public ActionResult UpdateRole([FromRoute] UpdateRoleDto dto)
         {
-            _service.UpdateRole(id, role);
-            return Ok($"User id: {id} has role: {role} now");
+            _service.UpdateRole(dto);
+            return Ok($"User id: {dto.UserId} changed role {dto.RoleId}");
         }
     }
 }
