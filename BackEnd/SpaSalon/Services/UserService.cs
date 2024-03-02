@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SpaSalon.Database;
 using SpaSalon.Database.Entities;
 using SpaSalon.Exceptions;
@@ -10,18 +11,20 @@ namespace SpaSalon.Services
     {
         void RemoveUser(int id);
         public List<User> GetUsers(PaginationInfoDto dto);
-        void UpdateRole(int id, string role);
+        void UpdateRole(UpdateRoleDto dto);
         List<Role> GetRoles();
     }
     public class UserService : IUserService
     {
         private readonly MyDbContext _context;
         private readonly ILogger<UserService> _logger;
+        private readonly IMapper _mapper;
 
-        public UserService(MyDbContext context, ILogger<UserService> logger)
+        public UserService(MyDbContext context, ILogger<UserService> logger, IMapper mapper)
         {
             _context = context;
             _logger = logger;
+            _mapper = mapper;
         }
 
         public List<User> GetUsers(PaginationInfoDto dto)
@@ -56,20 +59,21 @@ namespace SpaSalon.Services
             return _context.Roles.ToList();
         }
 
-        public void UpdateRole(int id, string role)
+        public void UpdateRole(UpdateRoleDto dto)
         {
-            var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Id == id);
+            var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Id == dto.UserId);
             if (user == null)
             {
                 throw new NotFoundException("Not found");
             }
-            var targetRole = _context.Roles.FirstOrDefault(r => r.Name == role);
+            var targetRole = _context.Roles.FirstOrDefault(r => r.Id == dto.RoleId);
 
             if (targetRole == null)
             {
                 throw new NotFoundException("Role not found");
             }
-            user.Role.Name = role;
+            _mapper.Map(dto, user);
+
             _context.SaveChanges();
         }
     }
