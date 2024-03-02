@@ -8,7 +8,6 @@ namespace SpaSalon.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _service;
@@ -20,10 +19,18 @@ namespace SpaSalon.Controllers
         [HttpPost]
         public ActionResult BookingMassage(BookingMassageDto dto)
         {
-            int id = _service.BookingMassage(dto);
+            int id = _service.CreateBooking(dto);
             return Created("/api/booking/id", null);
         }
+
         [Authorize(Roles = "Manager, Admin")]
+        [HttpGet("{id}")]
+        public ActionResult GetBooking(int id)
+        {
+            var booking = _service.GetBooking(id);
+            return Ok(booking);
+        }
+
         [HttpDelete("{id}")]
         public ActionResult RemoveBooking(int id)
         {

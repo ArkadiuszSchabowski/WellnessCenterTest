@@ -36,7 +36,7 @@ namespace SpaSalon.Controllers
         {
 
             _service.RemoveUser(id);
-            return Ok();
+            return NoContent();
         }
         [HttpGet("role")]
         public ActionResult GetRoles()
