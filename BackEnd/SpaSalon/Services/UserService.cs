@@ -36,31 +36,20 @@ namespace SpaSalon.Services
             {
                 throw new NotFoundException("User not found");
             }
-            if(dto.PageSize < 1 || dto.PageNumber < 1)
-            {
-                throw new BadRequestException("Invalid page size or page number");
-            }
             List<UserDto> usersDto = _mapper.Map<List<UserDto>>(users);
             return usersDto;
         }
         public object GetUser(int id)
         {
-            var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Id == id);
-            if (user == null)
-            {
-                throw new NotFoundException("Not found");
-            }
+            var user = GetUserById(id);
+
             return user;
         }
 
         public void RemoveUser(int id)
         {
-            var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Id == id);
+            var user = GetUserById(id);
 
-            if (user == null)
-            {
-                throw new NotFoundException("Not found");
-            }
             _logger.LogWarning($"Remove user {id}");
             _context.Users.Remove(user);
             _context.SaveChanges();
@@ -72,20 +61,32 @@ namespace SpaSalon.Services
 
         public void UpdateRole(UpdateRoleDto dto)
         {
-            var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Id == dto.UserId);
+            var user = GetUserById(dto.UserId);
+
+            GetRoleById(dto.RoleId);
+
+            _mapper.Map(dto, user);
+            _context.SaveChanges();
+        }
+
+        private void GetRoleById(int roleId)
+        {
+            var targetRole = _context.Roles.SingleOrDefault(r => r.Id == roleId);
+
+            if (targetRole == null)
+            {
+                throw new NotFoundException($"Role with Id: {roleId} not found");
+            }
+        }
+
+        public User GetUserById(int id)
+        {
+            var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Id == id);
             if (user == null)
             {
                 throw new NotFoundException("Not found");
             }
-            var targetRole = _context.Roles.FirstOrDefault(r => r.Id == dto.RoleId);
-
-            if (targetRole == null)
-            {
-                throw new NotFoundException("Role not found");
-            }
-            _mapper.Map(dto, user);
-
-            _context.SaveChanges();
+            return user;
         }
     }
 
