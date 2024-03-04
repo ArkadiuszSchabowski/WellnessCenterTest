@@ -4,6 +4,7 @@ using SpaSalon.Database;
 using SpaSalon.Database.Entities;
 using SpaSalon.Exceptions;
 using SpaSalon.Models;
+using System.Runtime.InteropServices;
 
 namespace SpaSalon.Services
 {
@@ -20,6 +21,9 @@ namespace SpaSalon.Services
         private readonly MyDbContext _context;
         private readonly ILogger<UserService> _logger;
         private readonly IMapper _mapper;
+
+        public delegate T GetClass<T>(int id);
+
 
         public UserService(MyDbContext context, ILogger<UserService> logger, IMapper mapper)
         {

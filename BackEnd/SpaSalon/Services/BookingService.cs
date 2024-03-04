@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using SpaSalon.Database;
 using SpaSalon.Database.Entities;
 using SpaSalon.Exceptions;

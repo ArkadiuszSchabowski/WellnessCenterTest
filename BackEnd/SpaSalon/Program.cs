@@ -5,8 +5,6 @@ using NLog.Extensions.Logging;
 using SpaSalon.Database;
 using SpaSalon.Database.Entities;
 using SpaSalon.Middleware;
-
-//using SpaSalon.Middleware;
 using SpaSalon.Seeders;
 using SpaSalon.Services;
 using System.Text;
